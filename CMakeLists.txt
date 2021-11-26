@@ -3,4 +3,7 @@ project(raytracer)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(raytracer main.cpp)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
+add_subdirectory(src)
