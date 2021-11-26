@@ -9,11 +9,18 @@ public:
     float z;
 
     Tuple(float x, float y, float z, float w);
-    bool is_point() const;
-    bool is_vector() const;
+
+    [[nodiscard]] bool is_point() const;
+
+    [[nodiscard]] bool is_vector() const;
+
+    [[nodiscard]] bool operator==(const Tuple rhs) const;
+
 private:
     float w;
 };
 
+Tuple point(float x, float y, float z);
+Tuple vector(float x, float y, float z);
 
 #endif //RAYTRACER_TUPLE_H
