@@ -90,11 +90,11 @@ public:
     return lhs;
 }
 
-[[nodiscard]] float abs(const Tuple &tuple) {
+[[nodiscard]] constexpr float abs(const Tuple &tuple) {
     return hypot(tuple.x, tuple.y, tuple.z);
 }
 
-[[nodiscard]] Tuple norm(const Tuple &tuple) {
+[[nodiscard]] constexpr Tuple norm(const Tuple &tuple) {
     return tuple / abs(tuple);
 }
 
