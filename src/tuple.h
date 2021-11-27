@@ -51,41 +51,49 @@ public:
     }
 };
 
-Tuple point(float x, float y, float z);
+[[nodiscard]] Tuple point(float x, float y, float z);
 
-Tuple vector(float x, float y, float z);
+[[nodiscard]] Tuple vector(float x, float y, float z);
 
-constexpr Tuple operator+(Tuple lhs, const Tuple &rhs) {
+[[nodiscard]] constexpr Tuple operator+(Tuple lhs, const Tuple &rhs) {
     lhs += rhs;
     return lhs;
 }
 
-constexpr Tuple operator-(Tuple lhs, const Tuple &rhs) {
+[[nodiscard]] constexpr Tuple operator-(Tuple lhs, const Tuple &rhs) {
     lhs -= rhs;
     return lhs;
 }
 
-constexpr Tuple operator-(Tuple tuple) {
+[[nodiscard]] constexpr Tuple operator-(Tuple tuple) {
     tuple *= -1;
     return tuple;
 }
 
-constexpr Tuple operator*(Tuple lhs, float rhs) {
+[[nodiscard]] constexpr Tuple operator*(Tuple lhs, float rhs) {
     lhs *= rhs;
     return lhs;
 }
 
-constexpr Tuple operator/(Tuple lhs, float rhs) {
+[[nodiscard]] constexpr Tuple operator/(Tuple lhs, float rhs) {
     lhs /= rhs;
     return lhs;
 }
 
-constexpr float abs(const Tuple &tuple) {
+[[nodiscard]] constexpr float abs(const Tuple &tuple) {
     return hypot(tuple.x, tuple.y, tuple.z);
 }
 
-constexpr Tuple norm(const Tuple &tuple) {
+[[nodiscard]] constexpr Tuple norm(const Tuple &tuple) {
     return tuple / abs(tuple);
+}
+
+[[nodiscard]] constexpr float inner_product(const Tuple &lhs, const Tuple &rhs) {
+    return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
+}
+
+[[nodiscard]] constexpr Tuple cross_product(const Tuple &lhs, const Tuple &rhs) {
+    return vector(lhs.y * rhs.z - lhs.z * rhs.y, lhs.z * rhs.x - lhs.x * rhs.z, lhs.x * rhs.y - lhs.y * rhs.x);
 }
 
 #endif //RAYTRACER_TUPLE_H

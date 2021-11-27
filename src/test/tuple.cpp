@@ -239,3 +239,26 @@ SCENARIO("The magnitude of a normalized vector") {
         }
     }
 }
+
+SCENARIO("The dot product of two tuples") {
+    GIVEN("Two vectors a and b") {
+        const auto a = vector(1, 2, 3);
+        const auto b = vector(2, 3, 4);
+
+        THEN("dot(a, b) returns the correct dot product") {
+            CHECK(equal(inner_product(a, b), 20.0f));
+        }
+    }
+}
+
+SCENARIO("The cross product of two vectors") {
+    GIVEN("Two vectors a and b") {
+        const auto a = vector(1, 2, 3);
+        const auto b = vector(2, 3, 4);
+
+        THEN("cross(a, b) and cross(b, a) return the correct cross products") {
+            CHECK(cross_product(a, b) == vector(-1, 2, -1));
+            CHECK(cross_product(b, a) == vector(1, -2, 1));
+        }
+    }
+}
