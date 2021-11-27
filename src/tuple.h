@@ -14,7 +14,7 @@ public:
 
     [[nodiscard]] bool is_vector() const;
 
-    [[nodiscard]] bool operator==(const Tuple rhs) const;
+    [[nodiscard]] bool operator==(Tuple rhs) const;
 
 private:
     float w;
