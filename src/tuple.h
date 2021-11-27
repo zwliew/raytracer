@@ -16,6 +16,22 @@ public:
 
     [[nodiscard]] bool operator==(Tuple rhs) const;
 
+    constexpr Tuple &operator+=(const Tuple &rhs) {
+        x += rhs.x;
+        y += rhs.y;
+        z += rhs.z;
+        w += rhs.w;
+        return *this;
+    }
+
+    constexpr Tuple &operator-=(const Tuple &rhs) {
+        x -= rhs.x;
+        y -= rhs.y;
+        z -= rhs.z;
+        w -= rhs.w;
+        return *this;
+    }
+
     constexpr Tuple &operator*=(float rhs) {
         x *= rhs;
         y *= rhs;
@@ -37,19 +53,19 @@ Tuple point(float x, float y, float z);
 
 Tuple vector(float x, float y, float z);
 
-// TODO: make this more efficient by reducing copies:
-// 1. take rhs by const reference.
-// 2. take lhs by copy and modify it in-place before returning it.
-constexpr Tuple operator+(Tuple lhs, Tuple rhs) {
-    return Tuple{lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w};
+constexpr Tuple operator+(Tuple lhs, const Tuple &rhs) {
+    lhs += rhs;
+    return lhs;
 }
 
-constexpr Tuple operator-(Tuple lhs, Tuple rhs) {
-    return Tuple{lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w};
+constexpr Tuple operator-(Tuple lhs, const Tuple &rhs) {
+    lhs -= rhs;
+    return lhs;
 }
 
 constexpr Tuple operator-(Tuple tuple) {
-    return Tuple{-tuple.x, -tuple.y, -tuple.z, -tuple.w};
+    tuple *= -1;
+    return tuple;
 }
 
 constexpr Tuple operator*(Tuple lhs, float rhs) {
