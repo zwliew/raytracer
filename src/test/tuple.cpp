@@ -18,7 +18,7 @@ SCENARIO("A tuple with w=1.0 is a point") {
 
 SCENARIO("A tuple with w=0 is a vector") {
     GIVEN("a = tuple(4.3, -4.2, 3.1, 0)") {
-        const Tuple a{4.3, -4.2, 3.1, 0};
+        const Tuple a{4.3f, -4.2f, 3.1f, 0.0f};
 
         THEN("a is a vector with the correct attributes") {
             CHECK(a.x == 4.3f);

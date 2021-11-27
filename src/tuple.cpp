@@ -3,26 +3,26 @@
 //
 
 #include "tuple.h"
+#include "numeric.h"
 
-Tuple::Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {
-}
+Tuple::Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
 bool Tuple::is_point() const {
-    return w == 1.0;
+    return equal(w, 1.0f);
 }
 
 bool Tuple::is_vector() const {
-    return w == 0;
+    return equal(w, 0.0f);
 }
 
 bool Tuple::operator==(const Tuple rhs) const {
-    return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w;
+    return equal(x, rhs.x) && equal(y, rhs.y) && equal(z, rhs.z) && equal(w, rhs.w);
 }
 
 Tuple point(float x, float y, float z) {
-    return Tuple{x, y, z, 1};
+    return Tuple{x, y, z, 1.0f};
 }
 
 Tuple vector(float x, float y, float z) {
-    return Tuple{x, y, z, 0};
+    return Tuple{x, y, z, 0.0f};
 }
