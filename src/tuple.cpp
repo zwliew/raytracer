@@ -5,8 +5,6 @@
 #include "tuple.h"
 #include "numeric.h"
 
-Tuple::Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
-
 bool Tuple::is_point() const {
     return equal(w, 1.0f);
 }
