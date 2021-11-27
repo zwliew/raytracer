@@ -3,6 +3,8 @@
 
 #include "numeric.h"
 
+#include <iostream>
+
 class Tuple {
 public:
     float x;
@@ -104,6 +106,11 @@ public:
 
 [[nodiscard]] constexpr Tuple cross_product(const Tuple &lhs, const Tuple &rhs) {
     return vector(lhs.y * rhs.z - lhs.z * rhs.y, lhs.z * rhs.x - lhs.x * rhs.z, lhs.x * rhs.y - lhs.y * rhs.x);
+}
+
+constexpr std::ostream &operator<<(std::ostream &os, const Tuple &tuple) {
+    os << "Tuple{" << tuple.x << ", " << tuple.y << ", " << tuple.z << "}";
+    return os;
 }
 
 #endif //RAYTRACER_TUPLE_H

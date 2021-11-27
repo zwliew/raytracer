@@ -18,6 +18,18 @@ public:
     [[nodiscard]] constexpr float b() const {
         return z;
     }
+
+    constexpr Color &operator*=(const Color &rhs) {
+        x *= rhs.x;
+        y *= rhs.y;
+        z *= rhs.z;
+        return *this;
+    }
 };
+
+[[nodiscard]] Color operator*(Color lhs, const Color &rhs) {
+    lhs *= rhs;
+    return lhs;
+}
 
 #endif //RAYTRACER_COLOR_H
