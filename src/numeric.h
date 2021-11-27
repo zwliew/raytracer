@@ -12,7 +12,7 @@ constexpr float EPSILON = 0.00001f;
 }
 
 // Note: beware of floating point imprecision
-[[nodiscard]] constexpr float hypot(float x, float y, float z) {
+[[nodiscard]] float hypot(float x, float y, float z) {
     return sqrt(x * x + y * y + z * z);
 }
 

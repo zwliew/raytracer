@@ -12,11 +12,17 @@ public:
 
     constexpr Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
-    [[nodiscard]] bool is_point() const;
+    [[nodiscard]] constexpr bool is_point() const {
+        return equal(w, 1.0f);
+    }
 
-    [[nodiscard]] bool is_vector() const;
+    [[nodiscard]] constexpr bool is_vector() const {
+        return equal(w, 0.0f);
+    }
 
-    [[nodiscard]] bool operator==(Tuple rhs) const;
+    [[nodiscard]] bool operator==(const Tuple rhs) const {
+        return equal(x, rhs.x) && equal(y, rhs.y) && equal(z, rhs.z) && equal(w, rhs.w);
+    }
 
     constexpr Tuple &operator+=(const Tuple &rhs) {
         x += rhs.x;
@@ -51,9 +57,13 @@ public:
     }
 };
 
-[[nodiscard]] Tuple point(float x, float y, float z);
+[[nodiscard]] constexpr Tuple point(float x, float y, float z) {
+    return Tuple{x, y, z, 1.0f};
+}
 
-[[nodiscard]] Tuple vector(float x, float y, float z);
+[[nodiscard]] constexpr Tuple vector(float x, float y, float z) {
+    return Tuple{x, y, z, 0.0f};
+}
 
 [[nodiscard]] constexpr Tuple operator+(Tuple lhs, const Tuple &rhs) {
     lhs += rhs;
@@ -80,11 +90,11 @@ public:
     return lhs;
 }
 
-[[nodiscard]] constexpr float abs(const Tuple &tuple) {
+[[nodiscard]] float abs(const Tuple &tuple) {
     return hypot(tuple.x, tuple.y, tuple.z);
 }
 
-[[nodiscard]] constexpr Tuple norm(const Tuple &tuple) {
+[[nodiscard]] Tuple norm(const Tuple &tuple) {
     return tuple / abs(tuple);
 }
 
