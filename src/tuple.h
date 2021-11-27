@@ -1,6 +1,8 @@
 #ifndef RAYTRACER_TUPLE_H
 #define RAYTRACER_TUPLE_H
 
+#include "numeric.h"
+
 class Tuple {
 public:
     float x;
@@ -76,6 +78,10 @@ constexpr Tuple operator*(Tuple lhs, float rhs) {
 constexpr Tuple operator/(Tuple lhs, float rhs) {
     lhs /= rhs;
     return lhs;
+}
+
+constexpr float abs(const Tuple &tuple) {
+    return hypot(tuple.x, tuple.y, tuple.z);
 }
 
 #endif //RAYTRACER_TUPLE_H

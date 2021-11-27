@@ -155,3 +155,53 @@ SCENARIO("Dividing a tuple by a scalar") {
         }
     }
 }
+
+SCENARIO("Computing the magnitude of vector(1, 0, 0)") {
+    GIVEN("v = vector(1, 0, 0)") {
+        const auto v = vector(1, 0, 0);
+
+        THEN("abs(v) == 1") {
+            CHECK(abs(v) == 1.0f);
+        }
+    }
+}
+
+SCENARIO("Computing the magnitude of vector(0, 1, 0)") {
+    GIVEN("v = vector(1, 0, 0)") {
+        const auto v = vector(0, 1, 0);
+
+        THEN("abs(v) == 1") {
+            CHECK(abs(v) == 1.0f);
+        }
+    }
+}
+
+SCENARIO("Computing the magnitude of vector(0, 0, 1)") {
+    GIVEN("v = vector(1, 0, 0)") {
+        const auto v = vector(0, 0, 1);
+
+        THEN("abs(v) == 1") {
+            CHECK(abs(v) == 1);
+        }
+    }
+}
+
+SCENARIO("Computing the magnitude of vector(1, 2, 3)") {
+    GIVEN("v = vector(1, 0, 0)") {
+        const auto v = vector(1, 2, 3);
+
+        THEN("abs(v) == 1") {
+            CHECK(abs(v) == sqrt(14.0f));
+        }
+    }
+}
+
+SCENARIO("Computing the magnitude of vector(-1, -2, -3)") {
+    GIVEN("v = vector(1, 0, 0)") {
+        const auto v = vector(-1, -2, -3);
+
+        THEN("abs(v) == 1") {
+            CHECK(abs(v) == sqrt(14.0f));
+        }
+    }
+}
