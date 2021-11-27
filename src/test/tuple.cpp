@@ -122,3 +122,36 @@ SCENARIO("Negating a tuple") {
         }
     }
 }
+
+SCENARIO("Multiplying a tuple by a scalar") {
+    GIVEN("a = tuple(1, -2, 3, -4)") {
+        const Tuple a{1, -2, 3, -4};
+        const Tuple expected{3.5, -7, 10.5, -14};
+
+        THEN("a * 3.5 == tuple(3.5, -7, 10.5, -14)") {
+            CHECK(a * 3.5 == expected);
+        }
+    }
+}
+
+SCENARIO("Multiplying a tuple by a fraction") {
+    GIVEN("a = tuple(1, -2, 3, -4") {
+        const Tuple a{1, -2, 3, -4};
+        const Tuple expected{0.5, -1, 1.5, -2};
+
+        THEN("a * 0.5 == tuple(0.5, -1, 1.5, -2)") {
+            CHECK(a * 0.5 == expected);
+        }
+    }
+}
+
+SCENARIO("Dividing a tuple by a scalar") {
+    GIVEN("a = tuple(1, -2, 3, -4") {
+        const Tuple a{1, -2, 3, -4};
+        const Tuple expected{0.5, -1, 1.5, -2};
+
+        THEN("a / 2 == tuple(0.5, -1, 1.5, -2)") {
+            CHECK(a / 2 == expected);
+        }
+    }
+}
