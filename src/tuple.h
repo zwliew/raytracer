@@ -84,4 +84,8 @@ constexpr float abs(const Tuple &tuple) {
     return hypot(tuple.x, tuple.y, tuple.z);
 }
 
+constexpr Tuple norm(const Tuple &tuple) {
+    return tuple / abs(tuple);
+}
+
 #endif //RAYTRACER_TUPLE_H

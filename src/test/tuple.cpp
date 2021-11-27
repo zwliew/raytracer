@@ -7,9 +7,9 @@ SCENARIO("A tuple with w=1.0 is a point") {
         const Tuple a{4.3, -4.2, 3.1, 1.0};
 
         THEN("a is a point with the correct attributes") {
-            CHECK(a.x == 4.3f);
-            CHECK(a.y == -4.2f);
-            CHECK(a.z == 3.1f);
+            CHECK(equal(a.x, 4.3f));
+            CHECK(equal(a.y, -4.2f));
+            CHECK(equal(a.z, 3.1f));
             CHECK(a.is_point());
             CHECK(!a.is_vector());
         }
@@ -21,9 +21,9 @@ SCENARIO("A tuple with w=0 is a vector") {
         const Tuple a{4.3f, -4.2f, 3.1f, 0.0f};
 
         THEN("a is a vector with the correct attributes") {
-            CHECK(a.x == 4.3f);
-            CHECK(a.y == -4.2f);
-            CHECK(a.z == 3.1f);
+            CHECK(equal(a.x, 4.3f));
+            CHECK(equal(a.y, -4.2f));
+            CHECK(equal(a.z, 3.1f));
             CHECK(!a.is_point());
             CHECK(a.is_vector());
         }
@@ -161,7 +161,7 @@ SCENARIO("Computing the magnitude of vector(1, 0, 0)") {
         const auto v = vector(1, 0, 0);
 
         THEN("abs(v) == 1") {
-            CHECK(abs(v) == 1.0f);
+            CHECK(equal(abs(v), 1.0f));
         }
     }
 }
@@ -171,7 +171,7 @@ SCENARIO("Computing the magnitude of vector(0, 1, 0)") {
         const auto v = vector(0, 1, 0);
 
         THEN("abs(v) == 1") {
-            CHECK(abs(v) == 1.0f);
+            CHECK(equal(abs(v), 1.0f));
         }
     }
 }
@@ -202,6 +202,40 @@ SCENARIO("Computing the magnitude of vector(-1, -2, -3)") {
 
         THEN("abs(v) == 1") {
             CHECK(abs(v) == sqrt(14.0f));
+        }
+    }
+}
+
+SCENARIO("Normalizing vector(4, 0, 0) gives (1, 0, 0)") {
+    GIVEN("v = vector(4, 0, 0)") {
+        const auto v = vector(4, 0, 0);
+
+        THEN("norm(v) == vector(1, 0, 0)") {
+            CHECK(norm(v) == vector(1, 0, 0));
+        }
+    }
+}
+
+SCENARIO("Normalizing vector(1, 2, 3)") {
+    GIVEN("v = vector(1, 2, 3)") {
+        const auto v = vector(1, 2, 3);
+
+        THEN("norm(v) == vector(0.26726, 0.53452, 0.80178)") {
+            CHECK(norm(v) == vector(0.26726f, 0.53452f, 0.80178f));
+        }
+    }
+}
+
+SCENARIO("The magnitude of a normalized vector") {
+    GIVEN("v = vector(1, 2, 3)") {
+        const auto v = vector(1, 2, 3);
+
+        WHEN("norm == norm(v)") {
+            const auto normalized = norm(v);
+
+            THEN("abs(normalized) == 1") {
+                CHECK(equal(abs(normalized), 1.0f));
+            }
         }
     }
 }
