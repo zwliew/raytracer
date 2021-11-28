@@ -3,7 +3,7 @@
 
 #include "tuple.h"
 
-class Color : public Tuple {
+class Color : public Tuple<float> {
 public:
     constexpr Color() : Tuple(0, 0, 0, 0) {}
 
@@ -20,19 +20,7 @@ public:
     [[nodiscard]] constexpr float b() const {
         return z;
     }
-
-    constexpr Color &operator*=(const Color &rhs) {
-        x *= rhs.x;
-        y *= rhs.y;
-        z *= rhs.z;
-        return *this;
-    }
 };
-
-[[nodiscard]] constexpr Color operator*(Color lhs, const Color &rhs) {
-    lhs *= rhs;
-    return lhs;
-}
 
 [[nodiscard]] constexpr uint8_t to_byte(float colorFloat) {
     return static_cast<uint8_t>(std::clamp(std::round(colorFloat * 255.0f), 0.0f, 255.0f));

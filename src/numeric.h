@@ -4,6 +4,10 @@
 #include <algorithm>
 #include <cmath>
 
+// Based on https://stackoverflow.com/questions/58067259/will-there-be-a-concept-for-arithmetic-types-in-c-standard-library
+template<class T>
+concept arithmetic = std::is_arithmetic_v<T>;
+
 constexpr float EPSILON = 0.00001f;
 
 // Based on http://realtimecollisiondetection.net/blog/?p=89

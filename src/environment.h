@@ -5,10 +5,10 @@
 
 class Environment {
 public:
-    Tuple gravity;
-    Tuple wind;
+    Tuple<float> gravity;
+    Tuple<float> wind;
 
-    constexpr Environment(Tuple gravity, Tuple wind) : gravity(gravity), wind(wind) {}
+    constexpr Environment(Tuple<float> gravity, Tuple<float> wind) : gravity(gravity), wind(wind) {}
 };
 
 #endif //RAYTRACER_ENVIRONMENT_H

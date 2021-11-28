@@ -33,7 +33,7 @@ SCENARIO("A tuple with w=0 is a vector") {
 SCENARIO("point() creates tuples with w=1.0") {
     GIVEN("p = point(4, -4, 3)") {
         constexpr auto p = point(4, -3, 3);
-        constexpr Tuple expected{4, -3, 3, 1};
+        constexpr Tuple expected{4.0f, -3.0f, 3.0f, 1.0f};
 
         THEN("p = tuple(4, -4, 3, 1)") {
             CHECK(p == expected);
@@ -44,7 +44,7 @@ SCENARIO("point() creates tuples with w=1.0") {
 SCENARIO("vector() creates tuples with w=0") {
     GIVEN("v = vector(4, -3, 3") {
         constexpr auto v = vector(4, -3, 3);
-        constexpr Tuple expected{4, -3, 3, 0};
+        constexpr Tuple expected{4.0f, -3.0f, 3.0f, 0.0f};
 
         THEN("v = tuple(4, -3, 3, 0)") {
             CHECK(v == expected);
@@ -125,30 +125,30 @@ SCENARIO("Negating a tuple") {
 
 SCENARIO("Multiplying a tuple by a scalar") {
     GIVEN("a = tuple(1, -2, 3, -4)") {
-        constexpr Tuple a{1, -2, 3, -4};
-        constexpr Tuple expected{3.5, -7, 10.5, -14};
+        constexpr Tuple a{1.0f, -2.0f, 3.0f, -4.0f};
+        constexpr Tuple expected{3.5f, -7.0f, 10.5f, -14.0f};
 
         THEN("a * 3.5 == tuple(3.5, -7, 10.5, -14)") {
-            CHECK(a * 3.5 == expected);
+            CHECK(a * 3.5f == expected);
         }
     }
 }
 
 SCENARIO("Multiplying a tuple by a fraction") {
     GIVEN("a = tuple(1, -2, 3, -4") {
-        constexpr Tuple a{1, -2, 3, -4};
-        constexpr Tuple expected{0.5, -1, 1.5, -2};
+        constexpr Tuple<float> a{1, -2, 3, -4};
+        constexpr Tuple<float> expected{0.5, -1, 1.5, -2};
 
         THEN("a * 0.5 == tuple(0.5, -1, 1.5, -2)") {
-            CHECK(a * 0.5 == expected);
+            CHECK(a * 0.5f == expected);
         }
     }
 }
 
 SCENARIO("Dividing a tuple by a scalar") {
     GIVEN("a = tuple(1, -2, 3, -4") {
-        constexpr Tuple a{1, -2, 3, -4};
-        constexpr Tuple expected{0.5, -1, 1.5, -2};
+        constexpr Tuple<float> a{1, -2, 3, -4};
+        constexpr Tuple<float> expected{0.5, -1, 1.5, -2};
 
         THEN("a / 2 == tuple(0.5, -1, 1.5, -2)") {
             CHECK(a / 2 == expected);

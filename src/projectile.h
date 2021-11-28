@@ -6,10 +6,10 @@
 
 class Projectile {
 public:
-    Tuple position;
-    Tuple velocity;
+    Tuple<float> position;
+    Tuple<float> velocity;
 
-    constexpr Projectile(Tuple position, Tuple velocity) : position(position), velocity(velocity) {}
+    constexpr Projectile(Tuple<float> position, Tuple<float> velocity) : position(position), velocity(velocity) {}
 };
 
 [[nodiscard]] constexpr Projectile tick(const Environment &env, const Projectile &proj) {

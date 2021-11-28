@@ -41,7 +41,7 @@ SCENARIO("Multiplying a color by a scalar") {
         constexpr Color c{0.2f, 0.3f, 0.4f};
 
         THEN("c * 2 == Color(0.4, 0.6, 0.8)") {
-            CHECK(c * 2 == Color{0.4f, 0.6f, 0.8f});
+            CHECK(c * 2.0f == Color{0.4f, 0.6f, 0.8f});
         }
     }
 }
