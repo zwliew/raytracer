@@ -34,4 +34,8 @@ public:
     return lhs;
 }
 
+[[nodiscard]] constexpr uint8_t to_byte(float colorFloat) {
+    return static_cast<uint8_t>(std::clamp(std::round(colorFloat * 255.0f), 0.0f, 255.0f));
+}
+
 #endif //RAYTRACER_COLOR_H

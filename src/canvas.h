@@ -25,12 +25,45 @@ private:
     std::vector<Color> pixels;
 
     [[nodiscard]] constexpr size_t index(size_t x, size_t y) const {
-        return x * width + y;
+        return y * width + x;
     }
 };
 
 [[nodiscard]] std::string to_ppm(const Canvas &canvas) {
-    return "P3\n" + std::to_string(canvas.width) + " " + std::to_string(canvas.height) + "\n255\n";
+    constexpr size_t MAX_LINE_LEN = 70;
+
+    std::string result = "P3\n";
+    result += std::to_string(canvas.width);
+    result += " ";
+    result += std::to_string(canvas.height);
+    result += "\n255\n";
+
+    size_t curLineLen = 0;
+    const auto append = [&](const std::string &s) {
+        bool prefixSpace = curLineLen != 0;
+        if (curLineLen + std::size(s) + prefixSpace > MAX_LINE_LEN) {
+            curLineLen = 0;
+            result += '\n';
+            prefixSpace = false;
+        }
+        if (prefixSpace) {
+            result += " ";
+        }
+        curLineLen += std::size(s) + prefixSpace;
+        result += s;
+    };
+
+    for (size_t y = 0; y < canvas.height; ++y) {
+        for (size_t x = 0; x < canvas.width; ++x) {
+            const auto &color = canvas[{x, y}];
+            append(std::to_string(to_byte(color.r())));
+            append(std::to_string(to_byte(color.g())));
+            append(std::to_string(to_byte(color.b())));
+        }
+        curLineLen = 0;
+        result += "\n";
+    }
+    return result;
 }
 
 #endif //RAYTRACER_CANVAS_H
