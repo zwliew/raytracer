@@ -5,6 +5,8 @@
 
 class Color : public Tuple {
 public:
+    constexpr Color() : Tuple(0, 0, 0, 0) {}
+
     constexpr Color(float r, float g, float b) : Tuple(r, g, b, 0) {}
 
     [[nodiscard]] constexpr float r() const {
@@ -27,7 +29,7 @@ public:
     }
 };
 
-[[nodiscard]] Color operator*(Color lhs, const Color &rhs) {
+[[nodiscard]] constexpr Color operator*(Color lhs, const Color &rhs) {
     lhs *= rhs;
     return lhs;
 }
