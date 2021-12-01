@@ -10,7 +10,7 @@ int main() {
     const auto draw_coord = [&](float x, float y) {
         const auto nx = static_cast<int16_t>(std::round(x));
         const auto ny = static_cast<int16_t>(std::round(y));
-        if (nx >= 0 && ny >= 0 && nx < c.width && ny < c.height) {
+        if (nx >= 0 && ny >= 0 && static_cast<size_t>(nx) < c.width && static_cast<size_t>(ny) < c.height) {
             c[{static_cast<size_t>(nx), c.height - 1 - ny}] = red;
         }
     };
