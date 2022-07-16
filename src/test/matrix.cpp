@@ -88,3 +88,12 @@ SCENARIO("A matrix multiplied by a tuple") {
     }
   }
 }
+
+SCENARIO("Multiplying a matrix by the identity matrix") {
+  GIVEN("A matrix A") {
+    const Matrix<int, 4> A = {0, 1, 2, 4,  1, 2, 4,  8,
+                              2, 4, 8, 16, 4, 8, 16, 32};
+
+    THEN("A * identity_matrix = A") { CHECK(A * identity<int, 4>() == A); }
+  }
+}

@@ -43,8 +43,8 @@ private:
 };
 
 template <class T, size_t N>
-[[nodiscard]] Matrix<T, N> operator*(const Matrix<T, N> &lhs,
-                                     const Matrix<T, N> &rhs) {
+[[nodiscard]] constexpr Matrix<T, N> operator*(const Matrix<T, N> &lhs,
+                                               const Matrix<T, N> &rhs) {
   Matrix<T, N> res;
   for (size_t r = 0; r < N; ++r) {
     for (size_t c = 0; c < N; ++c) {
@@ -57,12 +57,21 @@ template <class T, size_t N>
 }
 
 template <class T, size_t N>
-[[nodiscard]] Tuple<T> operator*(const Matrix<T, N> &lhs, const Tuple<T> &rhs) {
+[[nodiscard]] constexpr Tuple<T> operator*(const Matrix<T, N> &lhs,
+                                           const Tuple<T> &rhs) {
   Tuple<T> res;
   for (size_t r = 0; r < N; ++r) {
     for (size_t k = 0; k < N; ++k) {
       res[r] += lhs[{r, k}] * rhs[k];
     }
+  }
+  return res;
+}
+
+template <class T, size_t N> constexpr Matrix<T, N> identity() {
+  Matrix<T, N> res;
+  for (size_t i = 0; i < N; ++i) {
+    res[{i, i}] = 1;
   }
   return res;
 }
