@@ -20,6 +20,15 @@ public:
     return data[index(idx[0], idx[1])];
   }
 
+  [[nodiscard]] bool operator==(const Matrix<T, N> &rhs) const {
+    for (size_t i = 0; i < N * N; ++i) {
+      if (data[i] != rhs[{i / N, i % N}]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
 private:
   std::array<T, N * N> data;
 

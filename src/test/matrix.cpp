@@ -45,3 +45,21 @@ SCENARIO("A 3x3 matrix ought to be representable") {
     }
   }
 }
+
+SCENARIO("Matrix equality with identical matrices") {
+  GIVEN("A 4x4 matrix A and an identical 4x4 matrix B") {
+    const Matrix<int, 4> A = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+    const Matrix<int, 4> B = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+
+    THEN("A = B") { CHECK(A == B); }
+  }
+}
+
+SCENARIO("Matrix equality with different matrices") {
+  GIVEN("A 4x4 matrix A and a different 4x4 matrix B") {
+    const Matrix<int, 4> A = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+    const Matrix<int, 4> B = {2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+
+    THEN("A = B") { CHECK(A != B); }
+  }
+}
