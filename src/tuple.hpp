@@ -12,6 +12,8 @@ public:
   T z;
   T w;
 
+  constexpr Tuple() : x{0}, y{0}, z{0}, w{0} {}
+
   constexpr Tuple(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {}
 
   [[nodiscard]] constexpr bool is_point() const { return equal(w, 1.0f); }
@@ -21,6 +23,36 @@ public:
   [[nodiscard]] bool operator==(const Tuple rhs) const {
     return equal(x, rhs.x) && equal(y, rhs.y) && equal(z, rhs.z) &&
            equal(w, rhs.w);
+  }
+
+  [[nodiscard]] constexpr T &operator[](size_t idx) {
+    switch (idx) {
+    case 0:
+      return x;
+    case 1:
+      return y;
+    case 2:
+      return z;
+    case 3:
+    default:
+      // TODO: properly handle invalid indices
+      return w;
+    }
+  }
+
+  [[nodiscard]] constexpr const T &operator[](size_t idx) const {
+    switch (idx) {
+    case 0:
+      return x;
+    case 1:
+      return y;
+    case 2:
+      return z;
+    case 3:
+    default:
+      // TODO: properly handle invalid indices
+      return w;
+    }
   }
 
   constexpr Tuple &operator+=(const Tuple &rhs) {

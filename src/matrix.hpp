@@ -5,6 +5,8 @@
 #include <array>
 #include <cstddef>
 
+#include "tuple.hpp"
+
 template <class T, size_t N> class Matrix {
 public:
   constexpr Matrix() { std::fill(begin(data), end(data), 0); }
@@ -49,6 +51,17 @@ template <class T, size_t N>
       for (size_t k = 0; k < N; ++k) {
         res[{r, c}] += lhs[{r, k}] * rhs[{k, c}];
       }
+    }
+  }
+  return res;
+}
+
+template <class T, size_t N>
+[[nodiscard]] Tuple<T> operator*(const Matrix<T, N> &lhs, const Tuple<T> &rhs) {
+  Tuple<T> res;
+  for (size_t r = 0; r < N; ++r) {
+    for (size_t k = 0; k < N; ++k) {
+      res[r] += lhs[{r, k}] * rhs[k];
     }
   }
   return res;

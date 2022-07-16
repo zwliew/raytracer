@@ -1,5 +1,6 @@
 #include "matrix.hpp"
 #include "numeric.hpp"
+#include "tuple.hpp"
 
 #include <catch2/catch.hpp>
 
@@ -73,6 +74,17 @@ SCENARIO("Multiplying two matrices") {
       const Matrix<int, 4> expected = {20, 22, 50,  48,  44, 54, 114, 108,
                                        40, 58, 110, 102, 16, 26, 46,  42};
       CHECK(A * B == expected);
+    }
+  }
+}
+
+SCENARIO("A matrix multiplied by a tuple") {
+  GIVEN("A matrix A and a tuple B") {
+    const Matrix<int, 4> A = {1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1};
+    constexpr Tuple b{1, 2, 3, 1};
+
+    THEN("A * b has the correct elements") {
+      CHECK(A * b == Tuple{18, 24, 33, 1});
     }
   }
 }
