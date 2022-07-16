@@ -1,11 +1,14 @@
 #ifndef RAYTRACER_MATRIX_H
 #define RAYTRACER_MATRIX_H
 
+#include <algorithm>
 #include <array>
 #include <cstddef>
 
 template <class T, size_t N> class Matrix {
 public:
+  constexpr Matrix() { std::fill(begin(data), end(data), 0); }
+
   constexpr Matrix(const std::initializer_list<T> &data_) {
     std::copy_n(begin(data_), std::min(std::size(data), std::size(data_)),
                 begin(data));
@@ -22,7 +25,7 @@ public:
 
   [[nodiscard]] bool operator==(const Matrix<T, N> &rhs) const {
     for (size_t i = 0; i < N * N; ++i) {
-      if (data[i] != rhs[{i / N, i % N}]) {
+      if (data[i] != rhs.data[i]) {
         return false;
       }
     }
@@ -36,5 +39,19 @@ private:
     return r * N + c;
   }
 };
+
+template <class T, size_t N>
+[[nodiscard]] Matrix<T, N> operator*(const Matrix<T, N> &lhs,
+                                     const Matrix<T, N> &rhs) {
+  Matrix<T, N> res;
+  for (size_t r = 0; r < N; ++r) {
+    for (size_t c = 0; c < N; ++c) {
+      for (size_t k = 0; k < N; ++k) {
+        res[{r, c}] += lhs[{r, k}] * rhs[{k, c}];
+      }
+    }
+  }
+  return res;
+}
 
 #endif // RAYTRACER_MATRIX_H
